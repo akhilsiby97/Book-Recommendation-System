@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+ <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+ <link type="text/css" rel="stylesheet" 
+ href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+        
+ <title>BOOK RECOMMENDATION SYSTEM</title>
+ <script src="{{ url_for('static', filename='script.js') }}"></script>
+ <link type="text/css" rel="stylesheet" href="{{ url_for('static', 
+filename='style.css') }}">
+
+<style>
+    body
+    {
+        background-image:url({{url_for('static',filename='images/book.jpg')}})
+    }
+</style>    
+</head>
+<body>
+<h1>BOOK RECOMMENDATION SYSTEM</h1>
+<div id="firebase-auth-container"></div>
+<button id="sign-out" hidden="false">Sign out</button>
+ 
+
+<div id="login-info" hidden="false">
+    <form action="/book_search" method="post">
+        SEARCH BOOK HERE:<input type="text" name="Search_book" /> <br />
+        <input type="submit" name="button" />
+    </form>
+
+    <h2>Top Recommendations:</h2>
+    <ul>
+        {% for recommendation in recommendations %}
+            <li>
+                <img src="{{ recommendation['image_url'] }}" alt="{{ recommendation['title'] }}" width="100" height="150">
+                <p>{{ recommendation['title'] }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+<script src="{{ url_for('static', filename='app-setup.js') }}"></script>
+</html>
